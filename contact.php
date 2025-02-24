@@ -1,3 +1,13 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
+
+
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -22,7 +32,7 @@
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-    <style>.notification {
+    .notification {
         margin: 20px 0;
         padding: 10px;
         border: 1px solid #ccc;

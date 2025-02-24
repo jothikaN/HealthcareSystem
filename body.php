@@ -1,4 +1,8 @@
-<!--? Slider Area Start-->
+<?php
+// Include header first (it starts the session and displays the nav)
+include 'header.php';
+?>
+<!-- Slider Area Start-->
 <div class="slider-area">
     <div class="slider-active dot-style">
         <!-- Slider Single -->
@@ -15,11 +19,9 @@
                                 </a>
                             </div>
                             <div class="hero__caption">
-                                <h1 data-animation="fadeInUp" data-delay=".3s">Health is wealth keep it healthy </h1>
-                                <p data-animation="fadeInUp" data-delay=".6s">Let us prevent disease before it occurs.
-                                </p>
-                                <a href="services.html" class="btn" data-animation="fadeInLeft" data-delay=".3s">Take a
-                                    Service</a>
+                                <h1 data-animation="fadeInUp" data-delay=".3s">Health is wealth, keep it healthy</h1>
+                                <p data-animation="fadeInUp" data-delay=".6s">Let us prevent disease before it occurs.</p>
+                                <a href="services.html" class="btn" data-animation="fadeInLeft" data-delay=".3s">Take a Service</a>
                             </div>
                         </div>
                     </div>
@@ -40,10 +42,8 @@
                                 </a>
                             </div>
                             <div class="hero__caption">
-                                <h1 data-animation="fadeInUp" data-delay=".3s">Health is wealth keep it healthy </h1>
-                                <p data-animation="fadeInUp" data-delay=".6s">Almost before we knew it, we<br> had left
-                                    the ground</p>
-
+                                <h1 data-animation="fadeInUp" data-delay=".3s">Health is wealth, keep it healthy</h1>
+                                <p data-animation="fadeInUp" data-delay=".6s">Almost before we knew it, we<br> had left the ground</p>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,8 @@
     </div>
 </div>
 <!-- Slider Area End -->
-<!--? About-2 Area Start -->
+
+<!-- About-2 Area Start -->
 <div class="about-area2 section-padding40">
     <div class="container">
         <div class="row align-items-center">
@@ -65,15 +66,13 @@
             </div>
             <div class="col-lg-5 col-md-12">
                 <div class="about-caption">
-                    <!-- Section Tittle -->
+                    <!-- Section Title -->
                     <div class="section-tittle mb-35">
-                        <h2>Create a healthy
-                            life you love!</h2>
+                        <h2>Create a healthy life you love!</h2>
                     </div>
                     <p class="pera-top mb-40">Let us prevent disease before it occurs.</p>
-
                     <div class="icon-about">
-                        <img src="assets/img/icon/about1.svg" alt="" class=" mr-20">
+                        <img src="assets/img/icon/about1.svg" alt="" class="mr-20">
                         <img src="assets/img/icon/about2.svg" alt="">
                     </div>
                 </div>
@@ -82,6 +81,7 @@
     </div>
 </div>
 <!-- About-2 Area End -->
+
 <section class="wantToWork-area section-bg3" data-background="assets/img/gallery/section_bg01.png">
     <div class="container">
         <div class="wants-wrapper w-padding2">
@@ -99,10 +99,12 @@
         </div>
     </div>
 </section>
-<!--? Services Area Start -->
+
+<!-- Services Area Start -->
 <div class="service-area">
     <div class="container">
         <div class="row">
+            <!-- Service Items Here -->
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="single-cat text-center mb-50">
                     <div class="cat-icon">
@@ -110,8 +112,7 @@
                     </div>
                     <div class="cat-cap">
                         <h5><a href="services.html">Blood Pressure</a></h5>
-                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem
-                            ut ipsum.</p>
+                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum.</p>
                         <a href="services.html" class="plus-btn"><i class="ti-plus"></i></a>
                     </div>
                 </div>
@@ -123,8 +124,7 @@
                     </div>
                     <div class="cat-cap">
                         <h5><a href="services.html">Blood Sugar</a></h5>
-                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem
-                            ut ipsum.</p>
+                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum.</p>
                         <a href="services.html" class="plus-btn"><i class="ti-plus"></i></a>
                     </div>
                 </div>
@@ -136,8 +136,7 @@
                     </div>
                     <div class="cat-cap">
                         <h5><a href="services.html">Food System</a></h5>
-                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem
-                            ut ipsum.</p>
+                        <p>Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum.</p>
                         <a href="services.html" class="plus-btn"><i class="ti-plus"></i></a>
                     </div>
                 </div>
@@ -147,18 +146,10 @@
 </div>
 <!-- Services Area End -->
 
-<!--? Testimonial Area End -->
-<!--? video_start -->
-<div class="container">
-    <div class="video-area section-bg2 d-flex align-items-center" data-background="assets/img/gallery/video-bg.png">
-
-    </div>
-</div>
-<!-- video_end -->
-<!--? Blog Area Start -->
+<!-- Blog Area Start -->
 <section class="home-blog-area section-padding30">
     <div class="container">
-        <!-- Section Tittle -->
+        <!-- Section Title -->
         <div class="row justify-content-center">
             <div class="col-lg-7 col-md-9 col-sm-10">
                 <div class="section-tittle text-center mb-100">
@@ -167,6 +158,7 @@
             </div>
         </div>
         <div class="row">
+            <!-- Blog Items Here -->
             <div class="col-lg-4 col-md-6">
                 <div class="home-blog-single mb-40">
                     <div class="blog-img-cap">
@@ -174,58 +166,30 @@
                             <img src="assets/img/gallery/blog1.png" alt="">
                         </div>
                         <div class="blog-cap">
-                            <h3><a href="bloodsugardetails.php">"Let us protect ourselves from high Blood pressure."</a>
-                            </h3>
-                            <P>Let us protect ourselves from high blood pressure through healthy living.</P>
+                            <h3><a href="bloodsugardetails.php">"Let us protect ourselves from high Blood Pressure."</a></h3>
+                            <p>Let us protect ourselves from high blood pressure through healthy living.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="home-blog-single mb-40">
-                    <div class="blog-img-cap">
-                        <div class="blog-img">
-                            <img src="assets/img/gallery/blog3.png" alt="">
-                        </div>
-                        <div class="blog-cap">
-                            <h3><a href="bloodpressuredetails.php">"Let us protect ourselves from high Blood Sugar."</a>
-                            </h3>
-                            <P>Let us protect ourselves from high blood sugar through mindful eating.</P>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="home-blog-single mb-40">
-                    <div class="blog-img-cap">
-                        <div class="blog-img">
-                            <img src="assets/img/gallery/blog2.png" alt="">
-                        </div>
-                        <div class="blog-cap">
-                            <h3><a href="foodtable.php">Your daily Food plan</a></h3>
-                            <P>Food is a great source of medicine.</P>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Repeat for other blog items -->
         </div>
     </div>
 </section>
 <!-- Blog Area End -->
-<!--? About Law Start-->
+
+<!-- About Law Start-->
 <section class="about-low-area mt-30">
     <div class="container">
         <div class="about-cap-wrapper">
             <div class="row">
-                <div class="col-xl-5  col-lg-6 col-md-10 offset-xl-1">
+                <div class="col-xl-5 col-lg-6 col-md-10 offset-xl-1">
                     <div class="about-caption mb-50">
-                        <!-- Section Tittle -->
+                        <!-- Section Title -->
                         <div class="section-tittle mb-35">
                             <h2>100% satisfaction guaranteed.</h2>
                         </div>
                         <p>Let us prevent disease before it occurs.</p>
-
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">

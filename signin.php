@@ -1,7 +1,10 @@
-<!--? Header Start -->
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,9 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
     <!-- CSS here -->
-
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.css">
@@ -27,7 +28,6 @@
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
     <div class="header-area">
         <div class="main-header header-sticky">
@@ -49,66 +49,68 @@
                                         <li><a href="about.php">About</a></li>
                                         <li><a href="services.php">Services</a>
                                             <ul class="submenu">
-                                                <li><a href="index.php?pg=bloodsugardetails.php&option=add">Blood Sugar
-                                                        Details</a></li>
-                                                <li><a href="index.php?pg=bloodpressuredetails.php&option=add">Blood
-                                                        Pressure Details</a></li>
-                                                <li><a href="index.php?pg=foodtable.php&option=add">foodtable</a></li>
+                                                <li><a href="index.php?pg=bloodsugardetails.php&option=add">Blood Sugar Details</a></li>
+                                                <li><a href="index.php?pg=bloodpressuredetails.php&option=add">Blood Pressure Details</a></li>
+                                                <li><a href="index.php?pg=foodtable.php&option=add">Food Table</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="blog.php">Blog</a>
                                             <ul class="submenu">
-                                                <li><a href="index.php?pg=patient.php&option=add">Patient</a></li>
+                                                <li><a href="index.php?pg=patient_dashboard.php&option=add">Patient</a></li>
                                                 <li><a href="index.php?pg=staff.php&option=add">Staff</a></li>
-                                                <li><a
-                                                        href="index.php?pg=staffdestination.php&option=add">Staffdestination</a>
-                                                </li>
+                                                <li><a href="index.php?pg=staffdestination.php&option=add">Staff Destination</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="suggestion.php">Suggestion</a>
                                             <ul class="submenu">
-                                                <li><a href="index.php?pg=medicaldetails.php&option=add">Medical
-                                                        Details</a>
-                                                </li>
-                                                <li><a href="index.php?pg=maintainsuggestiondetails.php&option=add">Maintain
-                                                        Suggestion Details</a></li>
-                                                <li><a href="index.php?pg=systemsuggestion.php&option=add">System
-                                                        Suggestion</a></li>
+                                                <li><a href="index.php?pg=medicaldetails.php&option=add">Medical Details</a></li>
+                                                <li><a href="index.php?pg=maintainsuggestiondetails.php&option=add">Maintain Suggestion Details</a></li>
+                                                <li><a href="index.php?pg=systemsuggestion.php&option=add">System Suggestion</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="contact.php">Contact</a></li>
-                                        <li><a href="contact.php">Create Account</a>
-                                            <ul class="submenu">
-                                                <li><a href="Signup.php">Sign Up</a></li>
-                                                <li><a href="Signin.php">Sign In</a></li>
-
-                                        </li>
-                                    </ul>
-                                    </li>
+                                        <!-- Conditionally display account links -->
+                                        <?php if (isset($_SESSION['user_id']) && isset($_SESSION['name'])): ?>
+                                            <!-- If the user is logged in, show their name and Log Out -->
+                                            <li>
+                                                <a href="patient_dashboard.php">Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?></a>
+                                            </li>
+                                            <li>
+                                                <a href="logout.php">Log Out</a>
+                                            </li>
+                                        <?php else: ?>
+                                            <!-- If not logged in, show Sign Up / Sign In -->
+                                            <li>
+                                                <a href="#">Create Account</a>
+                                                <ul class="submenu">
+                                                    <li><a href="Signup.php">Sign Up</a></li>
+                                                    <li><a href="Signin.php">Sign In</a></li>
+                                                </ul>
+                                            </li>
+                                        <?php endif; ?>
                                     </ul>
                                 </nav>
                             </div>
-
                         </div>
                     </div>
-
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--? Slider Area Start-->
+    <!-- Slider Area Start-->
     <div class="slider-area">
         <div class="slider-active dot-style">
             <!-- Slider Single -->
             <div class="single-slider d-flex align-items-center slider-height">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-xl-7 col-lg-8 col-md-10 ">
+                        <div class="col-xl-7 col-lg-8 col-md-10">
                             <div class="hero-wrapper">
-                                <!-- Video icon -->
-
                                 <div class="hero__caption">
-
                                     <h1>Healthy Life.</h1>
                                     <div class="container h-100">
                                         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -116,70 +118,45 @@
                                                 <div class="card text-black" style="border-radius: 25px;">
                                                     <div class="card-body p-md-5">
                                                         <div class="row justify-content-center">
-
-                                                            <div
-                                                                class="col-md-13 col-lg-6 col-xl-10 order-4 order-lg-1">
-
-                                                                <p
-                                                                    class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                                                            <div class="col-md-13 col-lg-6 col-xl-10 order-4 order-lg-1">
+                                                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                                                                     Sign In</p>
-
-                                                                <form class="mx-1 mx-md-6" action="signinconnection.php"
-                                                                    method="POST">
-                                                                    <div
-                                                                        class="d-flex flex-row align-items-center mb-4">
+                                                                <form class="mx-1 mx-md-6" action="signinconnection.php" method="POST">
+                                                                    <div class="d-flex flex-row align-items-center mb-4">
                                                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                                        <div data-mdb-input-init
-                                                                            class="form-outline flex-fill mb-2">
-                                                                            <input type="email" id="email" name="email"
-                                                                                placeholder="email" required
-                                                                                class="form-control" />
-                                                                            <label class="form-label" for="email"><h3>Your
-                                                                                Email</h3></label>
+                                                                        <div class="form-outline flex-fill mb-2">
+                                                                            <input type="email" id="email" name="email" placeholder="email" required class="form-control" />
+                                                                            <label class="form-label" for="email"><h3>Your Email</h3></label>
                                                                         </div>
                                                                     </div>
-
-                                                                    <div
-                                                                        class="d-flex flex-row align-items-center mb-4">
+                                                                    <div class="d-flex flex-row align-items-center mb-4">
                                                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                                                        <div data-mdb-input-init
-                                                                            class="form-outline flex-fill mb-2">
-                                                                            <input type="password" id="password"
-                                                                                name="password" placeholder="password"
-                                                                                required class="form-control" />
-                                                                            <label class="form-label"
-                                                                                for="password"><h3>Password</h3></label>
+                                                                        <div class="form-outline flex-fill mb-2">
+                                                                            <input type="password" id="password" name="password" placeholder="password" required class="form-control" />
+                                                                            <label class="form-label" for="password"><h3>Password</h3></label>
                                                                         </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="d-flex justify-content-center mx-6 mb-5 mb-lg-6">
-                                                                        <button type="submit" data-mdb-button-init
-                                                                            data-mdb-ripple-init
-                                                                            class="btn btn-primary btn-lg">Login</button>
+                                                                    <div class="d-flex justify-content-center mx-6 mb-5 mb-lg-6">
+                                                                        <button type="submit" class="btn btn-primary btn-lg">Login</button>
                                                                     </div>
-
                                                                 </form>
-
                                                             </div>
-                                                            <div
-                                                                class="col-md-10 col-lg-6 col-xl-4 d-flex align-items-center order-1 order-lg-2">
-                                                                <img src="assets/authentication image/signup.jpg"
-                                                                    class="img-fluid" alt="Signup page illustration">
+                                                            <div class="col-md-10 col-lg-6 col-xl-4 d-flex align-items-center order-1 order-lg-2">
+                                                                <img src="assets/authentication image/signup.jpg" class="img-fluid" alt="Signup page illustration">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        </section>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+    <!-- Slider Area End -->
 </body>
-
 </html>
-<!-- Header End -->
