@@ -131,8 +131,8 @@ if ($option == 'delete' && isset($_GET['id'])) {
           <thead>
               <tr>
                   <th>ID</th>
-                  <th>Minimum Value</th>
-                  <th>Maximum Value</th>
+                  <th>Minimum Value(mg/dl)</th>
+                  <th>Maximum Value(mg/dl)</th>
                   <th>Status</th>
                   <th>Type</th>
                   <th>Actions</th>

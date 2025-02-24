@@ -65,19 +65,19 @@ if ($option == 'delete' && isset($_GET['id'])) {
       <h2>Add New Record</h2>
       <form method="post">
           <div class="form-group">
-              <label>Systolic Min</label>
+              <label>Systolic Min(mm Hg)</label>
               <input type="number" name="systolic_min" class="form-control" required>
           </div>
           <div class="form-group">
-              <label>Systolic Max</label>
+              <label>Systolic Max (mm Hg)</label>
               <input type="number" name="systolic_max" class="form-control" required>
           </div>
           <div class="form-group">
-              <label>Diastolic Min</label>
+              <label>Diastolic Min (mm Hg)</label>
               <input type="number" name="diastolic_min" class="form-control" required>
           </div>
           <div class="form-group">
-              <label>Diastolic Max</label>
+              <label>Diastolic Max (mm Hg)</label>
               <input type="number" name="diastolic_max" class="form-control" required>
           </div>
           <div class="form-group">
