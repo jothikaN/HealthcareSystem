@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <div class="main-menu f-right d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="index.php">Home</a></li>
+                                 
                                     <li><a href="about.php">About</a></li>
                                     <li><a href="services.php">Services</a>
                                         <ul class="submenu">
@@ -36,24 +36,24 @@ if (session_status() === PHP_SESSION_NONE) {
                                             <li><a href="index.php?pg=staffdestination.php&option=add">Staffdestination</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="suggestion.php">Suggestion</a>
-                                        <ul class="submenu">
-                                            <li><a href="index.php?pg=medicaldetails.php&option=add">Medical Details</a></li>
-                                            <li><a href="index.php?pg=maintainsuggestiondetails.php&option=add">Maintain Suggestion Details</a></li>
-                                            <li><a href="index.php?pg=systemsuggestion.php&option=add">System Suggestion</a></li>
-                                        </ul>
-                                    </li>
                                     <li><a href="contact.php">Contact</a></li>
-                                    <?php if (isset($_SESSION['user_id']) && isset($_SESSION['name'])): ?>
-                                        <!-- User is logged in: display Welcome message and Sign Out link -->
+
+                                    <?php if (isset($_SESSION['user_id']) && isset($_SESSION['name']) && isset($_SESSION['role'])): ?>
+                                        <!-- Display Dashboard based on Role -->
+                                        <?php if ($_SESSION['role'] === 'admin'): ?>
+                                            <li><a href="admin_dashboard.php">Ad_Dashboard</a></li>
+                                        <?php elseif ($_SESSION['role'] === 'user'): ?>
+                                            <li><a href="patient_dashboard.php">Dashboard</a></li>
+                                        <?php endif; ?>
+                                        
                                         <li>
-                                            <a href="patient_dashboard.php">
+                                            <a href="#">
                                                 Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>
                                             </a>
                                         </li>
                                         <li><a href="logout.php">Sign Out</a></li>
                                     <?php else: ?>
-                                        <!-- User is not logged in: display Create Account submenu -->
+                                        <!-- User is not logged in -->
                                         <li>
                                             <a href="#">Create Account</a>
                                             <ul class="submenu">
@@ -67,6 +67,8 @@ if (session_status() === PHP_SESSION_NONE) {
                         </div>
                     </div>
                 </div>
+         
+            
                 <!-- Mobile Menu -->
                 <div class="col-12">
                     <div class="mobile_menu d-block d-lg-none"></div>
@@ -75,4 +77,4 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </div>
-<!-- Header End -->
+

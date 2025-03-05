@@ -17,6 +17,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
   <!-- Link to Bootstrap CSS (adjust the path if needed) -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
+
 <body>
   <div class="container mt-5">
     <h1>Blood Pressure Check</h1>
