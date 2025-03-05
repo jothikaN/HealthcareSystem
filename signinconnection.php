@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message_type'] = "error";
     }
     $stmt->close();
-    header("Location: login.php");
+    header("Location: signin.php");
     exit;
 }
 ?>
