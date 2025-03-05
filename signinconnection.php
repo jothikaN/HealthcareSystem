@@ -8,8 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = $_POST['email'];
     $password = $_POST['password'];
     
-    $sql = "SELECT * FROM `user` WHERE email = '$email'";
-    $result = $con->query($sql);
+    $sql = "SELECT * FROM `user` WHERE email = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
     if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
@@ -18,18 +21,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = $user['role'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['email'] = $user['email'];
+            
+            $_SESSION['message'] = "Login successful! Welcome, " . $user['name'];
+            $_SESSION['message_type'] = "success"; // Used for Toastr type
+            
             // Redirect based on role
             if ($user['role'] === 'admin') {
                 header("Location: admin_dashboard.php");
             } else {
                 header("Location: patient_dashboard.php");
             }
-            exit; // Ensure script stops executing after the redirect
+            exit;
         } else {
-            echo "Invalid password!";
+            $_SESSION['message'] = "Invalid Password.";
+            $_SESSION['message_type'] = "error";
         }
     } else {
-        echo "User not found!";
+        $_SESSION['message'] = "User not found!";
+        $_SESSION['message_type'] = "error";
     }
+    $stmt->close();
+    header("Location: login.php");
+    exit;
 }
 ?>
