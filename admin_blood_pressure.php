@@ -115,7 +115,7 @@ if ($option == 'delete' && isset($_GET['id'])) {
         border-color: #c82333;
     }
     .table th {
-        background-color: #007bff;
+        background-color:rgb(29, 31, 33);
         color: white;
     }
     .table td, .table th {

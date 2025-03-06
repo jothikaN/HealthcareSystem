@@ -55,21 +55,41 @@ if ($option == 'delete' && isset($_GET['id'])) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - Blood Sugar Data Management</title>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <style>
+      body {
+          background-color: #f8f9fa;
+      }
+      .container {
+          max-width: 900px;
+          margin-top: 50px;
+      }
+      .form-group label {
+          font-weight: bold;
+      }
+      .btn {
+          margin-top: 10px;
+      }
+      .table th, .table td {
+          text-align: center;
+      }
+  </style>
 </head>
 <body>
-<div class="container mt-5">
-  <h1>Blood Sugar Data Management</h1>
+<div class="container">
+  <h1 class="text-center mb-4">Blood Sugar Data Management</h1>
+
   <?php if ($option == 'add'): ?>
-      <h2>Add New Record</h2>
+      <h2 class="text-center">Add New Record</h2>
       <form method="post">
           <div class="form-group">
-              <label>Minimum Value</label>
+              <label>Minimum Value (mg/dl)</label>
               <input type="number" step="0.01" name="min_value" class="form-control" required>
           </div>
           <div class="form-group">
-              <label>Maximum Value</label>
+              <label>Maximum Value (mg/dl)</label>
               <input type="number" step="0.01" name="max_value" class="form-control" required>
           </div>
           <div class="form-group">
@@ -83,9 +103,9 @@ if ($option == 'delete' && isset($_GET['id'])) {
                   <option value="2">Post Prandial</option>
               </select>
           </div>
-          <button type="submit" class="btn btn-primary">Add Record</button>
+          <button type="submit" class="btn btn-success btn-block">Add Record</button>
       </form>
-      <a href="admin_blood_sugar.php" class="btn btn-secondary mt-3">Back</a>
+      <a href="admin_blood_sugar.php" class="btn btn-secondary mt-3 btn-block">Back</a>
   <?php elseif ($option == 'edit' && isset($_GET['id'])):
           $id = $_GET['id'];
           $stmt = $con->prepare("SELECT * FROM blood_sugar_data WHERE id = ?");
@@ -94,18 +114,18 @@ if ($option == 'delete' && isset($_GET['id'])) {
           $result = $stmt->get_result();
           $record = $result->fetch_assoc();
           if (!$record) {
-              echo "<div class='alert alert-danger'>Record not found</div>";
+              echo "<div class='alert alert-danger text-center'>Record not found</div>";
           }
   ?>
-      <h2>Edit Record</h2>
+      <h2 class="text-center">Edit Record</h2>
       <form method="post">
           <input type="hidden" name="id" value="<?php echo $record['id']; ?>">
           <div class="form-group">
-              <label>Minimum Value</label>
+              <label>Minimum Value (mg/dl)</label>
               <input type="number" step="0.01" name="min_value" class="form-control" value="<?php echo $record['min_value']; ?>" required>
           </div>
           <div class="form-group">
-              <label>Maximum Value</label>
+              <label>Maximum Value (mg/dl)</label>
               <input type="number" step="0.01" name="max_value" class="form-control" value="<?php echo $record['max_value']; ?>" required>
           </div>
           <div class="form-group">
@@ -119,20 +139,20 @@ if ($option == 'delete' && isset($_GET['id'])) {
                   <option value="2" <?php if ($record['type'] == 2) echo "selected"; ?>>Post Prandial</option>
               </select>
           </div>
-          <button type="submit" class="btn btn-primary">Update Record</button>
+          <button type="submit" class="btn btn-warning btn-block">Update Record</button>
       </form>
-      <a href="admin_blood_sugar.php" class="btn btn-secondary mt-3">Back</a>
+      <a href="admin_blood_sugar.php" class="btn btn-secondary mt-3 btn-block">Back</a>
   <?php else: ?>
       <a href="admin_blood_sugar.php?option=add" class="btn btn-success mb-3">Add New Record</a>
       <?php
       $result = $con->query("SELECT * FROM blood_sugar_data");
       ?>
-      <table class="table table-bordered">
-          <thead>
+      <table class="table table-bordered table-striped">
+          <thead class="thead-dark">
               <tr>
                   <th>ID</th>
-                  <th>Minimum Value(mg/dl)</th>
-                  <th>Maximum Value(mg/dl)</th>
+                  <th>Minimum Value (mg/dl)</th>
+                  <th>Maximum Value (mg/dl)</th>
                   <th>Status</th>
                   <th>Type</th>
                   <th>Actions</th>
@@ -162,8 +182,10 @@ if ($option == 'delete' && isset($_GET['id'])) {
               <?php endwhile; ?>
           </tbody>
       </table>
-      <a href="admin_dashboard.php" class="btn btn-secondary mt-3">Back</a>
+      <a href="admin_dashboard.php" class="btn btn-secondary mt-3 btn-block">Back</a>
   <?php endif; ?>
 </div>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
