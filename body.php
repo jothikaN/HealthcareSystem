@@ -6,33 +6,11 @@ include 'header.php';
 <div class="slider-area">
     <div class="slider-active dot-style">
         <!-- Slider Single -->
-        <div class="single-slider d-flex align-items-center slider-height">
+        <div class="single-slider d-flex align-items-center" style="background-image: url('assets/img/patientdasboard/s4.jpg'); background-size: cover; background-position: center; height: 600px;">
+
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-xl-7 col-lg-8 col-md-10 ">
-                        <div class="hero-wrapper">
-                            <!-- Video icon -->
-                            <div class="video-icon">
-                                <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=up68UAfH0d0"
-                                    data-animation="bounceIn" data-delay=".4s">
-                                    <i class="fas fa-play"></i>
-                                </a>
-                            </div>
-                            <div class="hero__caption">
-                                <h1 data-animation="fadeInUp" data-delay=".3s">Health is wealth, keep it healthy</h1>
-                                <p data-animation="fadeInUp" data-delay=".6s">Let us prevent disease before it occurs.</p>
-                                <a href="services.html" class="btn" data-animation="fadeInLeft" data-delay=".3s">Take a Service</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Slider Single -->
-        <div class="single-slider d-flex align-items-center slider-height">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-7 col-lg-8 col-md-10 ">
+                    <div class="col-xl-7 col-lg-8 col-md-10">
                         <div class="hero-wrapper">
                             <!-- Video icon -->
                             <div class="video-icon">
@@ -52,6 +30,7 @@ include 'header.php';
         </div>
     </div>
 </div>
+
 <!-- Slider Area End -->
 
 <!-- About-2 Area Start -->
