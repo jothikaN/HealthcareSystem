@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'connect.php';  // Assumes $con is defined
 
+
 // Check if the user is logged in as a patient.
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
   header("Location: signin.php");
@@ -113,65 +114,249 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Toastr CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
   <style>
     body {
-      background-color: #f8f9fa;
-      font-family: 'Arial', sans-serif;
+      background-color: #f5f7fa;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #1a4708;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
     .card {
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      margin-bottom: 30px;
+      overflow: hidden;
     }
 
     .card-header {
-      background-color: rgb(41, 94, 8);
-      color: white;
-      font-size: 1.25rem;
-      border-radius: 10px 10px 0 0;
+      background: linear-gradient(135deg, #1a4708, #2b6e12);
+      color: #fff;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 20px;
+      font-weight: bold;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .form-control {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: #1a4708;
+      box-shadow: 0 0 10px rgba(26, 71, 8, 0.3);
     }
 
     .btn-primary {
-      background-color: rgb(41, 94, 8);
+      background-color: #1a4708;
       border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: 0.3s ease-in-out;
     }
 
     .btn-primary:hover {
-      background-color: rgb(41, 94, 8);
+      background-color: #2b6e12;
+      transform: translateY(-5px);
     }
 
     .btn-secondary {
       background-color: #6c757d;
       border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: 0.3s ease-in-out;
     }
 
     .btn-secondary:hover {
       background-color: #5a6268;
-    }
-
-    .badge-status {
-      font-size: 0.9em;
-      padding: 0.5em;
+      transform: translateY(-5px);
     }
 
     .table {
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-    }
-
-    .table th,
-    .table td {
-      vertical-align: middle;
+      background: #fff;
+      margin-top: 30px;
+      width: 100%;
+      table-layout: auto;
+      border-collapse: collapse;
     }
 
     .table thead th {
-      background-color: rgb(41, 94, 8);
+      background-color: #1a4708;
       color: white;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      padding: 15px;
+      border: 1px solid #ddd;
+    }
+
+    .table tbody tr:hover {
+      background-color: #e9f5e6;
+      transition: 0.3s;
+    }
+
+    .badge-status {
+      font-size: 0.9rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #fff;
     }
 
     .toast {
-      border-radius: 10px;
+      background: #1a4708;
+      color: white;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+
+    .toast-body {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .row {
+      margin-bottom: 15px;
+    }
+
+    /* Responsive Table */
+    @media (max-width: 768px) {
+      .table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+      }
+
+      .table thead {
+        display: none;
+      }
+
+      .table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .table tbody td {
+        display: block;
+        text-align: right;
+        padding: 10px;
+        position: relative;
+        border: 1px solid #ddd;
+        font-size: 0.9rem;
+      }
+
+      .table tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        color: #1a4708;
+      }
+
+      .card-header {
+        font-size: 1.3rem;
+      }
+
+      .form-control {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .col-md-6 {
+        width: 100%;
+        padding: 0 15px;
+      }
+    }
+
+    /* For smaller mobile screens */
+    @media (max-width: 480px) {
+      .form-control {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        font-size: 0.9rem;
+        padding: 8px 18px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .table td {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+
     }
   </style>
 </head>
@@ -192,53 +377,53 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
             <input type="hidden" name="id" value="<?php echo $patientDataToEdit['id']; ?>">
             <div class="row">
               <!-- Left Column -->
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 mb-3">
                 <div class="form-group">
-                  <label for="first_name">First Name</label>
+                  <label for="first_name"><i class="bi bi-person-fill"></i> First Name</label>
                   <input type="text" class="form-control" id="first_name" name="first_name" required value="<?php echo htmlspecialchars($patientDataToEdit['first_name']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="last_name">Last Name</label>
+                  <label for="last_name"><i class="bi bi-person"></i> Last Name</label>
                   <input type="text" class="form-control" id="last_name" name="last_name" required value="<?php echo htmlspecialchars($patientDataToEdit['last_name']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="email">Email</label>
+                  <label for="email"><i class="bi bi-envelope-fill"></i> Email</label>
                   <input type="email" class="form-control" id="email" name="email" required value="<?php echo htmlspecialchars($patientDataToEdit['email']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="mobile_number">Mobile Number</label>
+                  <label for="mobile_number"><i class="bi bi-phone-fill"></i> Mobile Number</label>
                   <input type="text" class="form-control" id="mobile_number" name="mobile_number" required value="<?php echo htmlspecialchars($patientDataToEdit['mobile_number']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="age">Age</label>
+                  <label for="age"><i class="bi bi-calendar-check-fill"></i> Age</label>
                   <input type="number" class="form-control" id="age" name="age" required value="<?php echo htmlspecialchars($patientDataToEdit['age']); ?>">
                 </div>
               </div>
 
               <!-- Right Column -->
-              <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 mb-3">
                 <div class="form-group">
-                  <label for="address">Address</label>
+                  <label for="address"><i class="bi bi-house-door-fill"></i> Address</label>
                   <input type="text" class="form-control" id="address" name="address" required value="<?php echo htmlspecialchars($patientDataToEdit['address']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="nic_no">NIC No</label>
+                  <label for="nic_no"><i class="bi bi-credit-card-2-front-fill"></i> NIC No</label>
                   <input type="text" class="form-control" id="nic_no" name="nic_no" required value="<?php echo htmlspecialchars($patientDataToEdit['nic_no']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="dob">DOB</label>
+                  <label for="dob"><i class="bi bi-calendar-event-fill"></i> DOB</label>
                   <input type="date" class="form-control" id="dob" name="dob" required value="<?php echo htmlspecialchars($patientDataToEdit['dob']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="weight">Weight</label>
+                  <label for="weight"><i class="bi bi-weight"></i> Weight</label>
                   <input type="text" class="form-control" id="weight" name="weight" required value="<?php echo htmlspecialchars($patientDataToEdit['weight']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="height">Height</label>
+                  <label for="height"><i class="bi bi-rulers"></i> Height</label>
                   <input type="text" class="form-control" id="height" name="height" required value="<?php echo htmlspecialchars($patientDataToEdit['height']); ?>">
                 </div>
                 <div class="form-group">
-                  <label for="gender">Gender</label>
+                  <label for="gender"><i class="bi bi-gender-ambiguous"></i> Gender</label>
                   <select class="form-control" id="gender" name="gender" required>
                     <option value="male" <?php if ($patientDataToEdit['gender'] === 'male') echo 'selected'; ?>>Male</option>
                     <option value="female" <?php if ($patientDataToEdit['gender'] === 'female') echo 'selected'; ?>>Female</option>
@@ -249,12 +434,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
 
             <!-- Buttons -->
             <div class="form-group text-center mt-4">
-              <button type="submit" class="btn btn-primary">Update</button>
-              <a href="patient_dashboard.php" class="btn btn-secondary ml-2">Cancel</a>
+              <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle-fill"></i> Update</button>
+              <a href="patient_dashboard.php" class="btn btn-secondary ml-2"><i class="bi bi-x-circle-fill"></i> Cancel</a>
             </div>
           </form>
         </div>
       </div>
+
     <?php elseif (!$patientExists): ?>
       <!-- New Details Form -->
       <div class="card mb-4">
@@ -263,104 +449,86 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
           <form action="connectpatient.php" method="POST">
             <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
             <div class="form-row">
-              <div class="form-group">
-                <label for="first_name">First Name:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="first_name"><i class="bi bi-person-fill"></i> First Name:</label>
                 <input type="text" id="first_name" name="first_name" class="form-control" required>
               </div>
-              <div class="form-group">
-                <label for="last_name">Last Name:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="last_name"><i class="bi bi-person"></i> Last Name:</label>
                 <input type="text" id="last_name" name="last_name" class="form-control" required>
               </div>
-              <!-- Add other fields as needed -->
-              <div class="form-group">
-                <label for="email">Email:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="email"><i class="bi bi-envelope-fill"></i> Email:</label>
                 <input type="email" id="email" name="email" class="form-control" required>
               </div>
-              <div class="form-group">
-                <label for="mobile_number">Mobile Number:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="mobile_number"><i class="bi bi-phone-fill"></i> Mobile Number:</label>
                 <input type="text" id="mobile_number" name="mobile_number" class="form-control" required>
               </div>
-              <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="nic_no">NIC No:</label>
-                <input type="text" id="nic_no" name="nic_no" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="dob">DOB:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="dob"><i class="bi bi-calendar-event-fill"></i> DOB:</label>
                 <input type="date" id="dob" name="dob" class="form-control" required>
               </div>
-              <div class="form-group">
-                <label for="weight">Weight:</label>
-                <input type="text" id="weight" name="weight" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="height">Height:</label>
-                <input type="text" id="height" name="height" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label for="gender">Gender:</label>
+              <div class="form-group col-md-6 col-sm-12 mb-3">
+                <label for="gender"><i class="bi bi-gender-ambiguous"></i> Gender:</label>
                 <select id="gender" name="gender" class="form-control" required>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
               </div>
-
             </div>
-            <!-- Add other fields similarly -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle-fill"></i> Submit</button>
           </form>
         </div>
       </div>
-    <?php else: ?>
+
+
+
+      <?php else: ?>
       <!-- Display existing details -->
       <div class="card mb-4">
-        <div class="card-header">Your Details</div>
+        <div class="card-header">👤 Patient Details</div>
         <div class="card-body">
           <div class="row">
             <!-- Left Column -->
-            <div class="col-md-6">
-              <p><strong>First Name:</strong> <?php echo htmlspecialchars($patientData['first_name']); ?></p>
-              <p><strong>Last Name:</strong> <?php echo htmlspecialchars($patientData['last_name']); ?></p>
-              <p><strong>Email:</strong> <?php echo htmlspecialchars($patientData['email']); ?></p>
-              <p><strong>Mobile Number:</strong> <?php echo htmlspecialchars($patientData['mobile_number']); ?></p>
-              <p><strong>Age:</strong> <?php echo htmlspecialchars($patientData['age']); ?></p>
-              <p><strong>Gender:</strong> <?php echo htmlspecialchars($patientData['gender']); ?></p>
+            <div class="col-md-6 col-sm-12 mb-3">
+              <p><strong>👤 First Name:</strong> <?php echo htmlspecialchars($patientData['first_name']); ?></p>
+              <p><strong>👤 Last Name:</strong> <?php echo htmlspecialchars($patientData['last_name']); ?></p>
+              <p><strong>✉️ Email:</strong> <?php echo htmlspecialchars($patientData['email']); ?></p>
+              <p><strong>📞 Mobile Number:</strong> <?php echo htmlspecialchars($patientData['mobile_number']); ?></p>
+              <p><strong>🎂 Age:</strong> <?php echo htmlspecialchars($patientData['age']); ?></p>
+              <p><strong>⚤ Gender:</strong> <?php echo htmlspecialchars($patientData['gender']); ?></p>
             </div>
 
             <!-- Right Column -->
-            <div class="col-md-6">
-              <p><strong>Address:</strong> <?php echo htmlspecialchars($patientData['address']); ?></p>
-              <p><strong>NIC No:</strong> <?php echo htmlspecialchars($patientData['nic_no']); ?></p>
-              <p><strong>DOB:</strong> <?php echo htmlspecialchars($patientData['dob']); ?></p>
-              <p><strong>Weight:</strong> <?php echo htmlspecialchars($patientData['weight']); ?></p>
-              <p><strong>Height:</strong> <?php echo htmlspecialchars($patientData['height']); ?></p>
+            <div class="col-md-6 col-sm-12 mb-3">
+              <p><strong>📍 Address:</strong> <?php echo htmlspecialchars($patientData['address']); ?></p>
+              <p><strong>🆔 NIC No:</strong> <?php echo htmlspecialchars($patientData['nic_no']); ?></p>
+              <p><strong>📅 DOB:</strong> <?php echo htmlspecialchars($patientData['dob']); ?></p>
+              <p><strong>⚖️ Weight:</strong> <?php echo htmlspecialchars($patientData['weight']); ?></p>
+              <p><strong>📏 Height:</strong> <?php echo htmlspecialchars($patientData['height']); ?></p>
               <div class="text-center mt-4">
-                <a href="patient_dashboard.php?option=edit&bstaffId=<?php echo $patientData['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                <a href="patient_dashboard.php?option=edit&bstaffId=<?php echo $patientData['id']; ?>" class="btn btn-primary btn-sm">
+                  ✏️ Edit
+                </a>
               </div>
             </div>
           </div>
-
-          <!-- Edit Button -->
-
         </div>
       </div>
-    <?php endif; ?>
+<?php endif; ?>
+
+
 
     <!-- Buttons for checking health readings -->
     <div class="mt-5 text-center">
       <h3>Check Your Health Readings</h3>
-      <div class="btn-group">
-        <a href="patient_blood_pressure.php" class="btn btn-info">Check Blood Pressure</a>
-        <a href="patient_blood_sugar.php" class="btn btn-info">Check Blood Sugar</a>
+      <div class="btn-group d-block d-md-flex justify-content-center w-100">
+        <a href="patient_blood_pressure.php" class="btn btn-info mb-2 mb-md-0 mr-md-2">Check Blood Pressure</a>
+        <a href="patient_blood_sugar.php" class="btn btn-info mb-2 mb-md-0">Check Blood Sugar</a>
       </div>
     </div>
+
 
     <!-- Display Blood Pressure Records -->
     <div class="mt-5">
@@ -382,23 +550,24 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
                   <th>Action</th>
                 </tr></thead><tbody>";
         while ($rowBP = $resultBP->fetch_assoc()) {
-          // Compute status using thresholds from blood_pressure_data
           $systolicVal = $rowBP['systolic'];
           $diastolicVal = $rowBP['diastolic'];
+
+          // Fetch status based on thresholds
           $stmtThreshold = $con->prepare("SELECT status FROM blood_pressure_data WHERE ? BETWEEN systolic_min AND systolic_max AND ? BETWEEN diastolic_min AND diastolic_max LIMIT 1");
           $stmtThreshold->bind_param("dd", $systolicVal, $diastolicVal);
           $stmtThreshold->execute();
           $resultThreshold = $stmtThreshold->get_result();
+
+          $computedStatus = "Not determined";
           if ($resultThreshold->num_rows > 0) {
             $thresholdData = $resultThreshold->fetch_assoc();
             $computedStatus = $thresholdData['status'];
-          } else {
-            $computedStatus = "Not determined";
           }
           $stmtThreshold->close();
 
-          // Use Bootstrap badges for status
-          $badgeClass = "secondary"; // default
+          // Assign badge class based on status
+          $badgeClass = "secondary";
           if (stripos($computedStatus, "normal") !== false) {
             $badgeClass = "success";
           } elseif (stripos($computedStatus, "pre") !== false) {
@@ -414,7 +583,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
           echo "<td><span class='badge badge-$badgeClass badge-status'>" . htmlspecialchars($computedStatus) . "</span></td>";
           echo "<td>
                       <a href='process_bp_delete.php?id=" . htmlspecialchars($rowBP['id']) . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>
-                    </td>";
+                  </td>";
           echo "</tr>";
         }
         echo "</tbody></table>";
@@ -449,21 +618,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
           $typeVal = $rowBS['type'];
           $typeText = ($typeVal == 1) ? "Fasting" : "Post Prandial";
 
-          // Fetch status for blood sugar.
+          // Fetch status based on thresholds
           $queryStatus = "SELECT status FROM blood_sugar_data WHERE min_value <= ? AND max_value >= ? AND type = ? LIMIT 1";
           $stmtStatus = $con->prepare($queryStatus);
           $stmtStatus->bind_param("dii", $bloodSugar, $bloodSugar, $typeVal);
           $stmtStatus->execute();
           $resultStatus = $stmtStatus->get_result();
+
+          $computedStatus = "Unknown";
           if ($resultStatus->num_rows > 0) {
             $statusRow = $resultStatus->fetch_assoc();
-            $computedStatus = $statusRow ? htmlspecialchars($statusRow['status']) : "Unknown";
-          } else {
-            $computedStatus = "Unknown";
+            $computedStatus = htmlspecialchars($statusRow['status']);
           }
           $stmtStatus->close();
 
-          // Set badge class based on computed status
+          // Assign badge class based on status
           $badgeClass = "secondary";
           if (stripos($computedStatus, "normal") !== false) {
             $badgeClass = "success";
@@ -480,7 +649,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
           echo "<td><span class='badge badge-$badgeClass badge-status'>" . $computedStatus . "</span></td>";
           echo "<td>
                       <a href='process_bs_delete.php?id=" . htmlspecialchars($rowBS['id']) . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>
-                    </td>";
+                  </td>";
           echo "</tr>";
         }
         echo "</tbody></table>";

@@ -1,120 +1,122 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Health | Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/gijgo.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/animated-headline.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Healthcare System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #e8f5e9; /* Light green background */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            width: 90%;
+            max-width: 950px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .login-image {
+            flex: 1;
+            background: url('https://media.giphy.com/media/Vu1i8D1Cq4tR9huzRH/giphy.gif?cid=ecf05e4787cec4qr2jj25dbn47q4us4dizr2a65buymew9to&ep=v1_gifs_search&rid=giphy.gif&ct=g') no-repeat center center;
+            background-size: cover;
+            min-height: 350px;
+        }
+        .login-form {
+            flex: 1;
+            padding: 40px;
+            text-align: center;
+        }
+        .login-form h2 {
+            color: #2e7d32; /* Dark Green */
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #c8e6c9;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+        }
+        .btn-green {
+            background-color: #2e7d32; /* Dark Green */
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: all 0.3s;
+        }
+        .btn-green:hover {
+            background-color: #1b5e20;
+        }
+        .forgot-password {
+            font-size: 14px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            .login-image {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <?php include_once("menu.php"); ?>
-</header>
+    <div class="login-container">
+        <!-- Left Side GIF -->
+        <div class="login-image"></div>
+        
+        <!-- Right Side Form -->
+        <div class="login-form">
+            <h2>Welcome Back</h2>
+            <p>Please login to continue</p>
 
-<!-- Slider Area Start -->
-<div class="slider-area">
-    <div class="slider-active dot-style">
-        <div class="single-slider d-flex align-items-center slider-height">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-7 col-lg-8 col-md-10">
-                        <div class="hero-wrapper">
-                            <div class="hero__caption">
-                                <h1>Healthy Life.</h1>
-                                <div class="container h-100">
-                                    <div class="row d-flex justify-content-center align-items-center h-100">
-                                        <div class="col-lg-12 col-xl-11">
-                                            <div class="card text-black" style="border-radius: 25px;">
-                                                <div class="card-body p-md-5">
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-md-13 col-lg-6 col-xl-10 order-4 order-lg-1">
-                                                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                                                                Sign In</p>
-
-                                                            <!-- Login Form -->
-                                                            <form class="mx-1 mx-md-6" action="signinconnection.php" method="POST">
-                                                                <div class="d-flex flex-row align-items-center mb-4">
-                                                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                                    <div class="form-outline flex-fill mb-2">
-                                                                        <input type="email" id="email" name="email" placeholder="email" required class="form-control" />
-                                                                        <label class="form-label" for="email"><h3>Your Email</h3></label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex flex-row align-items-center mb-4">
-                                                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                                                    <div class="form-outline flex-fill mb-2">
-                                                                        <input type="password" id="password" name="password" placeholder="password" required class="form-control" />
-                                                                        <label class="form-label" for="password"><h3>Password</h3></label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex justify-content-center mx-6 mb-5 mb-lg-6">
-                                                                    <button type="submit" class="btn btn-primary btn-lg">Login</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-md-10 col-lg-6 col-xl-4 d-flex align-items-center order-1 order-lg-2">
-                                                            <img src="assets/authentication image/signup.jpg" class="img-fluid" alt="Signup page illustration">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <form action="signinconnection.php" method="POST">
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-green w-100">Login</button>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </form>
         </div>
     </div>
-</div>
-<!-- Slider Area End -->
 
-<!-- jQuery & Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- jQuery and Toastr Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script>
-$(document).ready(function() {
-    <?php 
-    if (isset($_SESSION['message'])) { 
-        $msgType = $_SESSION['message_type'] ?? 'info'; 
-    ?>
-        toastr.<?php echo $msgType; ?>("<?php echo $_SESSION['message']; ?>");
-    <?php 
-        unset($_SESSION['message']); 
-        unset($_SESSION['message_type']); 
-    } 
-    ?>
-});
-</script>
+    <script>
+        <?php 
+        session_start();
+        if (isset($_SESSION['message'])): ?>
+            toastr.<?= $_SESSION['message_type'] ?>("<?= $_SESSION['message'] ?>");
+            <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+        <?php endif; ?>
+    </script>
 
 </body>
 </html>
