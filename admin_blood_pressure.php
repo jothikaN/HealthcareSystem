@@ -71,7 +71,7 @@ if ($option == 'delete' && isset($_GET['id'])) {
         
     }
     h1 {
-        color: #007bff;
+        color:rgb(20, 26, 32);
         text-align: center;
         margin-bottom: 30px;
     }
@@ -231,7 +231,7 @@ if ($option == 'delete' && isset($_GET['id'])) {
     </form>
     <a href="admin_blood_pressure.php" class="btn btn-secondary mt-3">Back</a>
 <?php else: ?>
-    <h2>Manage Blood Pressure Data</h2>
+    
     <a href="admin_blood_pressure.php?option=add" class="btn btn-success">Add New Record</a>
     <table class="table table-bordered mt-3">
         <thead>
