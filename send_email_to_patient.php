@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileName = $_FILES['attachment']['name'];
         $fileSize = $_FILES['attachment']['size'];
         $fileType = $_FILES['attachment']['type'];
-        
+
         // Verify file extension (should be PDF)
         $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
         if ($ext !== 'pdf') {
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: send_email_to_patient.php?id=" . $patientId);
             exit();
         }
-        
+
         // Read the file content and encode it
         $fileContent = chunk_split(base64_encode(file_get_contents($fileTmpPath)));
 
@@ -92,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Send Email to Patient</title>
@@ -101,61 +102,75 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
+
 <body>
-<div class="container mt-5">
-    <h1>Send Email to Patient</h1>
-    <p>
-        Patient: <strong><?php echo htmlspecialchars($patient['first_name'] . " " . $patient['last_name']); ?></strong>
-        (<em><?php echo htmlspecialchars($patient['email']); ?></em>)
-    </p>
-    <form action="send_email_to_patient.php?id=<?php echo $patientId; ?>" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" class="form-control" value="Important Health Update" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="6" class="form-control" required>
+    <div class="container mt-5">
+        <h1>Send Email to Patient</h1>
+        <p>
+            Patient: <strong><?php echo htmlspecialchars($patient['first_name'] . " " . $patient['last_name']); ?></strong>
+            (<em><?php echo htmlspecialchars($patient['email']); ?></em>)
+        </p>
+
+        <div class="row">
+            <!-- Email form (left side) -->
+            <div class="col-md-6">
+                <form action="send_email_to_patient.php?id=<?php echo $patientId; ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" name="subject" class="form-control" value="Important Health Update" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="6" class="form-control" required>
 Hello <?php echo htmlspecialchars($patient['first_name']); ?>,
 
 Please review your latest health readings on our system.
 
 Best regards,
 Your Healthcare Team
-            </textarea>
-        </div>
-        <div class="form-group">
-            <label for="attachment">Attach PDF (optional):</label>
-            <input type="file" id="attachment" name="attachment" class="form-control-file" accept=".pdf">
-        </div>
-        <button type="submit" class="btn btn-primary">Send Email</button>
-        <a href="admin_patient_details.php" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+                    </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attachment">Attach PDF (optional):</label>
+                        <input type="file" id="attachment" name="attachment" class="form-control-file" accept=".pdf">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Email</button>
+                    <a href="admin_patient_details.php" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
 
-<!-- jQuery, Bootstrap JS, and Toastr JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    toastr.options = {
-        "closeButton": true,
-        "progressBar": true,
-        "positionClass": "toast-bottom-right",
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
+            <!-- Image on the right side -->
+            <div class="col-md-4">
+                <img src="assets/img/adminemail/e1.jpg" alt="Healthcare Image" class="img-fluid">
+            </div>
 
-    $(document).ready(function() {
-        <?php if (isset($_SESSION['message'])): ?>
-            toastr.success("<?php echo addslashes($_SESSION['message']); ?>");
-            <?php unset($_SESSION['message']); ?>
-        <?php endif; ?>
-    });
-</script>
+        </div>
+    </div>
+
+    <!-- jQuery, Bootstrap JS, and Toastr JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        $(document).ready(function() {
+            <?php if (isset($_SESSION['message'])): ?>
+                toastr.success("<?php echo addslashes($_SESSION['message']); ?>");
+                <?php unset($_SESSION['message']); ?>
+            <?php endif; ?>
+        });
+    </script>
 </body>
+
 </html>
