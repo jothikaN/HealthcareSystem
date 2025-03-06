@@ -34,14 +34,14 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <!-- About link with active class -->
                                     <li><a href="about.php" class="<?php echo ($_SERVER['REQUEST_URI'] == '/about.php') ? 'active' : ''; ?>">About</a></li>
 
-                                    <!-- Services link with submenu -->
-                                    <li><a href="services.php" class="<?php echo ($_SERVER['REQUEST_URI'] == '/services.php') ? 'active' : ''; ?>">Services</a>
+                                    
+                                    <!-- <li><a href="services.php" class="<?php echo ($_SERVER['REQUEST_URI'] == '/services.php') ? 'active' : ''; ?>">Services</a>
                                         <ul class="submenu">
                                             <li><a href="index.php?pg=bloodsugardetails.php&option=view" class="<?php echo ($_SERVER['REQUEST_URI'] == '/index.php?pg=bloodsugardetails.php&option=view') ? 'active' : ''; ?>">Blood Sugar Details</a></li>
                                             <li><a href="index.php?pg=bloodpressuredetails.php&option=add" class="<?php echo ($_SERVER['REQUEST_URI'] == '/index.php?pg=bloodpressuredetails.php&option=add') ? 'active' : ''; ?>">Blood Pressure Details</a></li>
                                             <li><a href="index.php?pg=foodtable.php&option=add" class="<?php echo ($_SERVER['REQUEST_URI'] == '/index.php?pg=foodtable.php&option=add') ? 'active' : ''; ?>">Food Table</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
                                     <!-- Blog link with submenu -->
                                     <li><a href="blog.php" class="<?php echo ($_SERVER['REQUEST_URI'] == '/blog.php') ? 'active' : ''; ?>">Blog</a>
