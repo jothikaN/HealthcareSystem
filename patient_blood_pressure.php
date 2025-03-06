@@ -76,12 +76,12 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
             width: 100%;
             margin-top: 10px;
             border-radius: 10px;
-            background-color: #28a745;
+            background-color:rgb(213, 49, 49);
             border: none;
             color: white;
         }
         .btn-secondary:hover {
-            background-color: #218838;
+            background-color:rgb(144, 33, 31);
         }
     </style>
 </head>
