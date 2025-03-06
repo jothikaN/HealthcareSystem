@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
     <style>
         /* Background Image Styling */
         body {
-            background: url('assets/img/patientdasboard/s1.jpg') no-repeat center center/cover;
+            background: url('assets/img/patientdasboard/s2.jpg') no-repeat center center/cover;
             position: relative;
         }
         /* Overlay to improve readability */
